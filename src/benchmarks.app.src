@@ -1,0 +1,14 @@
+{ application, 'benchmarks'
+, [ {vsn, git}
+  , {description, "A Clojerl application"}
+  , {modules, []}
+  , { applications
+    , [ stdlib
+      , kernel
+      , clojerl
+      , criterium
+      ]
+    }
+  , {mod, {'benchmarks.app', []}}
+  ]
+}.
