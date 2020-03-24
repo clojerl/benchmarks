@@ -22,6 +22,14 @@
 ;; Experiment 1
 ;; -----------------------------------------------------------------------------
 
+(defn constant-expression
+  []
+  (run-experiment 1))
+
+;; -----------------------------------------------------------------------------
+;; Experiment 1
+;; -----------------------------------------------------------------------------
+
 (defn simple-function-call
   []
   (run-experiment (identity 1)))
@@ -73,9 +81,8 @@
 
 (defn last-item-in-range
   []
-  (run-experiment
-   (let [r (range 1000000)]
-     (run-experiment (last r)))))
+  (let [r (range 1000000)]
+    (run-experiment (last r))))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 7
@@ -90,7 +97,9 @@
 ;; -----------------------------------------------------------------------------
 
 (def experiments
-  {1 {:name "Simple function call"
+  {0 {:name "Constant expression"
+      :f constant-expression}
+   1 {:name "Simple function call"
       :f simple-function-call}
    2 {:name "List creation"
       :f list-creation}
