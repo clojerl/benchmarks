@@ -1,4 +1,5 @@
-(ns benchmarks.core)
+(ns benchmarks.core
+  (:require [clojure.string :as str]))
 
 (defmacro timestamp
   []
@@ -29,21 +30,24 @@
 
 (defn write-samples
   [samples filename]
-  (spit filename "")
-  (doseq [x samples]
-    (spit filename (str x "\n") :append true))
-  {:min (apply min samples)
-   :avg (/ (reduce + samples) (count samples))
-   :max (apply max samples)})
+  (spit filename
+        (str/join "\n" samples)))
 
 (defmacro warmup
   [expr]
   `(with-label "Running warm-up..."
      (collect-samples 100 ~expr)))
 
+(defn show-info
+  [samples]
+  (println "Min:" (apply min samples))
+  (println "Avg:" (float (/ (reduce + samples) (count samples))))
+  (println "Max:" (apply max samples)))
+
 (defmacro experiment
   [expr n filename]
   `(let [_# (warmup ~expr)
          samples# (collect-samples ~n ~expr)]
+     (show-info samples#)
      (with-label (str "Writing " ~n " samples to " ~filename)
        (write-samples samples# ~filename))))
