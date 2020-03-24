@@ -16,7 +16,8 @@
 
 (defmacro run-experiment
   [expr]
-  `(experiment ~expr 10000 "/tmp/data.dat"))
+  `(experiment ~expr 10000 #?(:clj "clj-data.dat"
+                              :clje "clje-data.dat")))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 1

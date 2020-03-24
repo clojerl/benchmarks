@@ -12,13 +12,20 @@
          end# (timestamp)]
      (- end# start#)))
 
+(defmacro with-label
+  [label & body]
+  `(do
+     (println ~label)
+     ~@body))
+
 (defmacro collect-samples
   [n expr]
-  `(loop [n# ~n
-          samples# []]
-     (if (pos? n#)
-       (recur (dec n#) (conj samples# (time-body ~expr)))
-       samples#)))
+  `(with-label (str "Collecting " ~n " samples...")
+    (loop [n# ~n
+            samples# []]
+       (if (pos? n#)
+         (recur (dec n#) (conj samples# (time-body ~expr)))
+         samples#))))
 
 (defn write-samples
   [samples filename]
@@ -31,12 +38,12 @@
 
 (defmacro warmup
   [expr]
-  `(do
-     (println "Running warm-up...")
+  `(with-label "Running warm-up..."
      (collect-samples 100 ~expr)))
 
 (defmacro experiment
   [expr n filename]
   `(let [_# (warmup ~expr)
          samples# (collect-samples ~n ~expr)]
-     (write-samples samples# ~filename)))
+     (with-label (str "Writing " ~n " samples to " ~filename)
+       (write-samples samples# ~filename))))
