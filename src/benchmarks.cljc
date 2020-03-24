@@ -1,17 +1,22 @@
 (ns benchmarks
-  (:use criterium.core))
+  #_(:use criterium.core)
+  (:use benchmarks.core))
 
 (def ^:dynamic *samples* 10)
 (def ^:dynamic *target-execution-time-seconds* 1)
 
+;; (defmacro run-experiment
+;;   [expr]
+;;   `(with-progress-reporting
+;;      (bench ~expr
+;;             :verbose
+;;             :samples *samples*
+;;             :target-execution-time (* *target-execution-time-seconds*
+;;                                       s-to-ns))))
+
 (defmacro run-experiment
   [expr]
-  `(with-progress-reporting
-     (bench ~expr
-            :verbose
-            :samples *samples*
-            :target-execution-time (* *target-execution-time-seconds*
-                                      s-to-ns))))
+  `(experiment ~expr 10000 "/tmp/data.dat"))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 1
@@ -68,8 +73,17 @@
 
 (defn last-item-in-range
   []
-  (let [r (range 1000000)]
-    (run-experiment (last r))))
+  (run-experiment
+   (let [r (range 1000000)]
+     (run-experiment (last r)))))
+
+;; -----------------------------------------------------------------------------
+;; Experiment 7
+;; -----------------------------------------------------------------------------
+
+(defn tight-loop
+  []
+  (run-experiment (loop [n 100000] (when (pos? n) (recur (dec n))))))
 
 ;; -----------------------------------------------------------------------------
 ;; Main entry point
@@ -87,7 +101,9 @@
    5 {:name "Read expression from string"
       :f read-expr-from-string}
    6 {:name "Last item in range"
-      :f last-item-in-range}})
+      :f last-item-in-range}
+   7 {:name "Tight loop"
+      :f tight-loop}})
 
 (defn -main
   [& args]
