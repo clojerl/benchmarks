@@ -1,9 +1,12 @@
 (ns benchmarks
   #_(:use criterium.core)
-  (:use benchmarks.core))
+  (:use benchmarks.core)
+  (:require [clojure.string :as str]))
 
 (def ^:dynamic *samples* 10)
 (def ^:dynamic *target-execution-time-seconds* 1)
+
+(def ^:dynamic *data-dir* "data")
 
 ;; (defmacro run-experiment
 ;;   [expr]
@@ -14,18 +17,25 @@
 ;;             :target-execution-time (* *target-execution-time-seconds*
 ;;                                       s-to-ns))))
 
+(defn output-file
+  [num]
+  (let [filename #?(:clj (str "clj-data-" num ".dat")
+                :clje (str "clje-data-" num ".dat"))]
+    (str/join "/" [*data-dir* filename])))
+
 (defmacro run-experiment
-  [expr]
-  `(experiment ~expr 10000 #?(:clj "clj-data.dat"
-                              :clje "clje-data.dat")))
+  [num expr]
+  `(experiment ~expr
+               10000
+               (output-file ~num)))
 
 ;; -----------------------------------------------------------------------------
-;; Experiment 1
+;; Experiment 0
 ;; -----------------------------------------------------------------------------
 
 (defn constant-expression
   []
-  (run-experiment 1))
+  (run-experiment 0 1))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 1
@@ -33,7 +43,7 @@
 
 (defn simple-function-call
   []
-  (run-experiment (identity 1)))
+  (run-experiment 1 (identity 1)))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 2
@@ -41,7 +51,7 @@
 
 (defn list-creation
   []
-  (run-experiment (list 1 2 3 4 5)))
+  (run-experiment 2 (list 1 2 3 4 5)))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 3
@@ -50,7 +60,7 @@
 (defn dynamic-function-application
   []
   (let [x (into [] (range 1000000))]
-    (run-experiment (apply + x))))
+    (run-experiment 3 (apply + x))))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 4
@@ -66,7 +76,7 @@
 (defn protocol-dispatch
   []
   (let [x (Bar.)]
-    (run-experiment (foo x))))
+    (run-experiment 4 (foo x))))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 5
@@ -74,7 +84,7 @@
 
 (defn read-expr-from-string
   []
-  (run-experiment (read-string "{:foo [1 2 3]}")))
+  (run-experiment 5 (read-string "{:foo [1 2 3]}")))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 6
@@ -83,7 +93,7 @@
 (defn last-item-in-range
   []
   (let [r (range 1000000)]
-    (run-experiment (last r))))
+    (run-experiment 6 (last r))))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 7
@@ -91,7 +101,7 @@
 
 (defn tight-loop
   []
-  (run-experiment (loop [n 100000] (when (pos? n) (recur (dec n))))))
+  (run-experiment 7 (loop [n 100000] (when (pos? n) (recur (dec n))))))
 
 ;; -----------------------------------------------------------------------------
 ;; Main entry point
