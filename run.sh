@@ -2,7 +2,7 @@
 
 DATA_DIR=data
 
-mkdir $DATA_DIR
+mkdir -p $DATA_DIR
 
 for i in $(seq 0 7)
 do
