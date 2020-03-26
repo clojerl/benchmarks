@@ -7,6 +7,10 @@
 (def ^:dynamic *target-execution-time-seconds* 1)
 
 (def ^:dynamic *data-dir* "data")
+(def ^:dynamic *graphs-dir* "graphs")
+
+#?(:clj (def ^:dynamic *file-prefix* "clj")
+   :clje (def ^:dynamic *file-prefix* "clje"))
 
 ;; (defmacro run-experiment
 ;;   [expr]
@@ -18,16 +22,15 @@
 ;;                                       s-to-ns))))
 
 (defn output-file
-  [num]
-  (let [filename #?(:clj (str "clj-data-" num ".dat")
-                :clje (str "clje-data-" num ".dat"))]
-    (str/join "/" [*data-dir* filename])))
+  [num dir prefix]
+  (let [filename (str prefix "-data-" num ".dat")]
+    (str/join "/" [dir filename])))
 
 (defmacro run-experiment
   [num expr]
   `(experiment ~expr
                10000
-               (output-file ~num)))
+               (output-file ~num *data-dir* *file-prefix*)))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 0
