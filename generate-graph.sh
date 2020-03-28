@@ -6,9 +6,10 @@ GRAPHS_DIR=graphs
 mkdir -p $DATA_DIR
 mkdir -p $GRAPHS_DIR
 
-for f in $(ls $DATA_DIR)
+for i in $(seq 0 7)
 do
     echo "==================================="
-    echo "Generating histogram for $f"
-    ./histogram.gp $DATA_DIR/$f $GRAPHS_DIR/$f.png
+    echo "Generating graphs for $i"
+    ./histogram.gp $i
+    ./linespoints.gp $i
 done
