@@ -31,7 +31,7 @@ width=(max-min)/n #interval width
 hist(x,width)=width*floor(x/width)+width/2.0
 
 #output terminal and file
-set term png
+set term png truecolor
 set output OUTPUT
 
 # Determine ranges for axis
@@ -43,7 +43,7 @@ set yrange [0:]
 set offset graph 0.05,0.05,0.05,0.0
 set xtics min,(max-min)/5,max
 set boxwidth width*0.9
-set style fill solid 0.5 #fillstyle
+set style fill transparent solid 0.5 #fillstyle
 set tics out nomirror
 set xlabel "Duration [ns]"
 set ylabel "Number of Samples"
