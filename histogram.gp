@@ -41,5 +41,5 @@ set xlabel "Duration [ns]"
 set ylabel "Frequency"
 
 #count and plot
-plot Clojure u (hist($1,width)):(1.0) smooth freq w boxes lc rgb(CLJ_COLOR) notitle, \
-     Clojerl u (hist($1,width)):(1.0) smooth freq w boxes lc rgb(CLJE_COLOR) notitle
+plot Clojure u (hist($1,width)):(1.0) smooth freq w boxes lc rgb(CLJ_COLOR) title "Clojure", \
+     Clojerl u (hist($1,width)):(1.0) smooth freq w boxes lc rgb(CLJE_COLOR) title "Clojerl"

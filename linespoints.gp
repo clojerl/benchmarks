@@ -11,8 +11,12 @@ CLJ_COLOR="blue"
 CLJE_COLOR="green"
 
 reset
-set term png #output terminal and file
+
+# Output png file
+set term png
 set output OUTPUT
+
+# Labels
 set xlabel "Sample"
 set ylabel "Duration [ns]"
 #count and plot
