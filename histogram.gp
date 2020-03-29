@@ -10,13 +10,21 @@ OUTPUT="graphs/histogram-".N.".png"
 CLJ_COLOR="blue"
 CLJE_COLOR="green"
 
+maximum(x, y) = (x > y ? x : y)
+minimum(x, y) = (x < y ? x : y)
+
 reset
 
 # Get stats from data
 stats Clojure u 1 nooutput
+max=STATS_max
+min=STATS_min
+
+stats Clojerl u 1 nooutput
+max=maximum(STATS_max, max)
+min=minimum(STATS_min, min)
+
 n=100 #number of intervals
-max=STATS_max #max value
-min=STATS_min #min value
 width=(max-min)/n #interval width
 
 #function used to map a value to the intervals

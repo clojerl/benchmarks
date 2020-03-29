@@ -12,13 +12,11 @@
   (let [items (for [i (sort (keys b/experiments))]
                 {:n i
                  :experiment (get-in b/experiments [i :name])
-                 :clj (-> (b/output-file i b/*graphs-dir* "clj")
-                          (str ".png")
-                          image-link)
-                 :clje (-> (b/output-file i b/*graphs-dir* "clje")
-                           (str ".png")
-                           image-link)})
+                 :histogram (-> (str b/*graphs-dir* "/histogram-" i ".png")
+                                image-link)
+                 :linespoints (-> (str b/*graphs-dir* "/linespoints-" i ".png")
+                                  image-link)})
         output (with-out-str
-                 (pp/print-table [:n :experiment :clj :clje] items))
+                 (pp/print-table [:n :experiment :histogram :linespoints] items))
         output (str/replace output "-+-" "-|-")]
     (spit "result.md" output)))
