@@ -46,7 +46,7 @@ set boxwidth width*0.9
 set style fill solid 0.5 #fillstyle
 set tics out nomirror
 set xlabel "Duration [ns]"
-set ylabel "Frequency"
+set ylabel "Number of Samples"
 
 #count and plot
 plot Clojure u (hist($1,width)):(1.0) smooth freq w boxes lc rgb(CLJ_COLOR) title "Clojure", \
