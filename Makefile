@@ -1,3 +1,5 @@
+.PHONY: graphs report
+
 graphs:
 	./generate-graph.sh
 

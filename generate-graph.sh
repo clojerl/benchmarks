@@ -12,4 +12,5 @@ do
     echo "Generating graphs for $i"
     ./histogram.gp $i
     ./linespoints.gp $i
+    ./boxplot.gp $i
 done
