@@ -35,6 +35,7 @@ min=maximum(0, min)
 # Output png file
 set term png
 set output OUTPUT
+set yrange [min:max]
 
 # Labels
 set style fill solid 0.5 border -1
@@ -50,11 +51,11 @@ set border 2
 set xtics ("Clojure" 1, "Clojerl" 2) scale 0.0
 set xtics nomirror
 set ytics nomirror
-set yrange [min:max]
+set ylabel "Duration [ns]"
 
 # set xlabel "Sample"
 # set ylabel "Duration [ns]"
 
 #count and plot
-plot Clojure using (1):1, \
-     Clojerl using (2):1
+plot Clojure using (1):1 lc rgb CLJ_COLOR, \
+     Clojerl using (2):1 lc rgb CLJE_COLOR
