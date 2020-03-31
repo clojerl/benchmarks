@@ -19,6 +19,12 @@ set output OUTPUT
 # Labels
 set xlabel "Sample"
 set ylabel "Duration [ns]"
+
+# Logarithmic scale
+# set logscale y 10
+
+set grid
+
 #count and plot
 plot Clojure with linespoints lc rgb(CLJ_COLOR), \
      Clojerl with linespoints lc rgb(CLJE_COLOR)

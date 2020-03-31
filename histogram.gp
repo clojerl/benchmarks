@@ -48,6 +48,8 @@ set tics out nomirror
 set xlabel "Duration [ns]"
 set ylabel "Number of Samples"
 
+set grid
+
 #count and plot
 plot Clojure u (hist($1,width)):(1) smooth freq w boxes lc rgb(CLJ_COLOR) title "Clojure", \
      Clojerl u (hist($1,width)):(1) smooth freq w boxes lc rgb(CLJE_COLOR) title "Clojerl"
