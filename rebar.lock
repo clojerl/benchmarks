@@ -1,6 +1,6 @@
 [{<<"clojerl">>,
   {git,"git://github.com/clojerl/clojerl.git",
-       {ref,"5eb2702a301db7d7b6074e2b120735854dd340fa"}},
+       {ref,"e2d55d246bb3f0a3f39c211d37d3536c19982997"}},
   0},
  {<<"criterium">>,
   {git,"git://github.com/clojerl/criterium.git",
