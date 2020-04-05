@@ -11,6 +11,9 @@ do
     echo "==================================="
     echo "Generating graphs for $i"
     ./histogram.gp $i
+    ./histogram.gp $i filtered
     ./linespoints.gp $i
+    ./linespoints.gp $i filtered
     ./boxplot.gp $i
+    ./boxplot.gp $i filtered
 done

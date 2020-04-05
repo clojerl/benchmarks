@@ -1,11 +1,14 @@
 #!/usr/local/bin/gnuplot -c
 
+# Number of experiment
 N=ARG1
+# Check if second argument is 'filtered'
+FILTERED=ARG2 eq "filtered" ? "-filtered" : ""
 
-Clojure="data/clj-data-".N.".dat"
-Clojerl="data/clje-data-".N.".dat"
+Clojure="data/clj-data-".N.FILTERED.".dat"
+Clojerl="data/clje-data-".N.FILTERED.".dat"
 
-OUTPUT="graphs/boxplot-".N.".png"
+OUTPUT="graphs/boxplot-".N.FILTERED.".png"
 
 CLJ_COLOR="blue"
 CLJE_COLOR="green"
