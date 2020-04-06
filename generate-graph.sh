@@ -6,7 +6,7 @@ GRAPHS_DIR=graphs
 mkdir -p $DATA_DIR
 mkdir -p $GRAPHS_DIR
 
-for i in $(seq 0 7)
+for i in $(seq -1 7)
 do
     echo "==================================="
     echo "Generating graphs for $i"
