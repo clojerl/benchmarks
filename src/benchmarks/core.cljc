@@ -1,6 +1,8 @@
 (ns benchmarks.core
   (:require [clojure.string :as str]))
 
+(def none ::none)
+
 (defmacro timestamp
   []
   #?(:clj `(System/nanoTime)
@@ -9,7 +11,8 @@
 (defmacro time-body
   [body]
   `(let [start# (timestamp)
-         _# ~body
+         ~@(when (not= body 'none)
+             `[_# ~body])
          end# (timestamp)]
      (- end# start#)))
 

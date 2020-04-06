@@ -33,6 +33,14 @@
                (output-file ~num *data-dir* *file-prefix*)))
 
 ;; -----------------------------------------------------------------------------
+;; Experiment -1
+;; -----------------------------------------------------------------------------
+
+(defn no-expression
+  []
+  (run-experiment -1 none))
+
+;; -----------------------------------------------------------------------------
 ;; Experiment 0
 ;; -----------------------------------------------------------------------------
 
@@ -111,7 +119,9 @@
 ;; -----------------------------------------------------------------------------
 
 (def experiments
-  {0 {:name "Constant expression"
+  {-1 {:name "No expression"
+      :f no-expression}
+   0 {:name "Constant expression"
       :f constant-expression}
    1 {:name "Simple function call"
       :f simple-function-call}
