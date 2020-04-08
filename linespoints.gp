@@ -2,13 +2,13 @@
 
 # Number of experiment
 N=ARG1
-# Check if second argument is 'filtered'
-FILTERED=ARG2 eq "filtered" ? "-filtered" : ""
+# Second argument is the file suffix which can be empty
+SUFFIX=ARG2
 
-Clojure="data/clj-data-".N.FILTERED.".dat"
-Clojerl="data/clje-data-".N.FILTERED.".dat"
+Clojure="data/clj-data-".N.SUFFIX.".dat"
+Clojerl="data/clje-data-".N.SUFFIX.".dat"
 
-OUTPUT="graphs/linespoints-".N.FILTERED.".png"
+OUTPUT="graphs/linespoints-".N.SUFFIX.".png"
 
 CLJ_COLOR="blue"
 CLJE_COLOR="green"

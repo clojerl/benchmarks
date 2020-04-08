@@ -11,9 +11,12 @@ do
     echo "==================================="
     echo "Generating graphs for $i"
     ./histogram.gp $i
-    ./histogram.gp $i filtered
+    ./histogram.gp $i -filtered
+    ./histogram.gp $i -no-overhead
     ./linespoints.gp $i
-    ./linespoints.gp $i filtered
+    ./linespoints.gp $i -filtered
+    ./linespoints.gp $i -no-overhead
     ./boxplot.gp $i
-    ./boxplot.gp $i filtered
+    ./boxplot.gp $i -filtered
+    ./boxplot.gp $i -no-overhead
 done
