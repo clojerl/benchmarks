@@ -12,13 +12,16 @@
   [path]
   (str "![](" path ")"))
 
-(defn -main
-  []
+(defn image-path
+  [type i suffix]
+  (str b/*graphs-dir* "/" (name type) "-" i suffix ".png"))
+
+(defn report
+  [suffix]
   (let [items (for [i (sort (keys b/experiments))]
                 (reduce (fn [acc graph]
                           (assoc acc graph
-                                 (-> b/*graphs-dir*
-                                     (str "/" (name graph) "-" i ".png")
+                                 (-> (image-path graph i suffix)
                                      image-link)))
                         {:n i
                          :experiment (get-in b/experiments [i :name])}
@@ -27,4 +30,10 @@
                  (pp/print-table (into [:n :experiment] graphs)
                                  items))
         output (str/replace output "-+-" "-|-")]
-    (spit "result.md" output)))
+    (spit (str "result" suffix ".md") output)))
+
+(defn -main
+  []
+  (report "")
+  (report "-filtered")
+  (report "-no-overhead"))
