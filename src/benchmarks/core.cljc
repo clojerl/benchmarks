@@ -32,7 +32,7 @@
          samples#))))
 
 (defn write-samples
-  [samples filename]
+  [filename samples]
   (spit filename
         (str/join "\n" samples)))
 
@@ -53,4 +53,4 @@
          samples# (collect-samples ~n ~expr)]
      (show-info samples#)
      (with-label (str "Writing " ~n " samples to " ~filename)
-       (write-samples samples# ~filename))))
+       (write-samples ~filename samples#))))
