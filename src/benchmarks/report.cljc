@@ -5,7 +5,7 @@
 
 (def graphs
   [:histogram
-   :linespoints
+   :points
    :boxplot])
 
 (defn image-link

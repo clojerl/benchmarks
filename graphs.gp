@@ -69,10 +69,10 @@ plot Clojure using (hist($1,width)):(1) \
              title "Clojerl"
 
 ################################################################################
-# Linespoints
+# Points
 ################################################################################
 
-OUTPUT="graphs/linespoints-".N.SUFFIX.".png"
+OUTPUT="graphs/points-".N.SUFFIX.".png"
 
 reset
 
