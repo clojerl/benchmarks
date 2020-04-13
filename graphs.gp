@@ -11,7 +11,7 @@ Clojerl="data/clje-data-".N.SUFFIX.".dat"
 CLJ_COLOR="blue"
 CLJE_COLOR="green"
 
-UNITS_LABEL=N eq "3" || N eq "6"? "µsecs" : "nsecs"
+UNITS_LABEL=N eq "3" || N eq "6"? "msecs" : "nsecs"
 UNITS_VALUE=N eq "3" || N eq "6"? 1000000 : 1
 
 ################################################################################
