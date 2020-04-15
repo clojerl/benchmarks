@@ -13,4 +13,5 @@ do
     ./graphs.gp $i
     ./graphs.gp $i -filtered
     ./graphs.gp $i -no-overhead
+    ./graphs.gp $i -no-overhead-filtered
 done

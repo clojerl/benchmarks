@@ -16,21 +16,21 @@
          (* over-n)
          math/sqrt)))
 
-(defn non-outlier?
+(defn not-outlier?
   [mu std-dev x]
   (< x (+ mu (* 3 std-dev))))
 
 (defn -main
-  []
+  [& [suffix]]
   (doseq [i (sort (keys b/experiments)) clj ["clj" "clje"]]
-    (let [input (str b/*data-dir* "/" clj "-data-" i ".dat")
-          output (str b/*data-dir* "/" clj "-data-" i "-filtered.dat")
+    (let [input (str b/*data-dir* "/" clj "-data-" i suffix ".dat")
+          output (str b/*data-dir* "/" clj "-data-" i suffix "-filtered.dat")
           samples (-> (slurp input)
                       (str/split "\n"))
           samples (mapv read-string samples)
           mu (mean samples)
           std-dev (std-dev mu samples)
-          samples' (filter #(non-outlier? mu std-dev %) samples)]
+          samples' (filter #(not-outlier? mu std-dev %) samples)]
       (println clj i "=>"
                :mu mu
                :std-dev std-dev

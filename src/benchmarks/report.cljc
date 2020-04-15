@@ -36,4 +36,5 @@
   []
   (report "")
   (report "-filtered")
-  (report "-no-overhead"))
+  (report "-no-overhead")
+  (report "-no-overhead-filtered"))
