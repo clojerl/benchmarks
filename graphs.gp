@@ -11,8 +11,11 @@ Clojerl="data/clje-data-".N.SUFFIX.".dat"
 CLJ_COLOR="blue"
 CLJE_COLOR="green"
 
-UNITS_LABEL=N eq "3" || N eq "6"? "msecs" : "nsecs"
+UNITS_LABEL=N eq "3" || N eq "6"? "ms" : "ns"
 UNITS_VALUE=N eq "3" || N eq "6"? 1000000 : 1
+
+UNITS_LABEL=N eq "5"? "μs" : UNITS_LABEL
+UNITS_VALUE=N eq "5"? 1000 : UNITS_VALUE
 
 ################################################################################
 # Histogram
