@@ -11,7 +11,7 @@
 
 (defn quantile-form-file
   [path]
-  (-> path utils/parse-file sort vec (stats/quantile 0.025)))
+  (-> path utils/parse-file sort vec (stats/quantile 0.25)))
 
 (defn -main
   []
