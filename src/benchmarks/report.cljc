@@ -27,10 +27,11 @@
   (let [samples (utils/parse-file path)
         mean (stats/mean samples)
         std-dev (stats/std-dev mean samples)
-        median (stats/quantile samples 0.5)]
-    (str "Mean = " mean "<br/>"
-         "StdDev = " std-dev "<br/>"
-         "Median = " median "<br/>")))
+        median (float (stats/quantile samples 0.5))]
+    (format "Mean = ~.4f<br/>StdDev = ~.4f<br/>Median = ~.4f"
+            mean
+            std-dev
+            median)))
 
 (defn report
   [suffix]
