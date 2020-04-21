@@ -24,7 +24,7 @@
 
 (defn metrics
   [path]
-  (let [samples (utils/parse-file path)
+  (let [samples (-> path utils/parse-file sort vec)
         mean (stats/mean samples)
         std-dev (stats/std-dev mean samples)
         median (float (stats/quantile samples 0.5))]
