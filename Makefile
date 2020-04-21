@@ -6,6 +6,9 @@ graphs:
 report:
 	rebar3 clojerl run -m benchmarks.report
 
+remove-overhead:
+	rebar3 clojerl run -m benchmarks.remove-overhead
+
 remove-outliers:
 	rebar3 clojerl run -m benchmarks.remove-outliers
 
