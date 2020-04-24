@@ -8,8 +8,8 @@ SUFFIX=ARG2
 Clojure="data/clj-data-".N.SUFFIX.".dat"
 Clojerl="data/clje-data-".N.SUFFIX.".dat"
 
-CLJ_COLOR="blue"
-CLJE_COLOR="green"
+CLJ_COLOR="dark-red"
+CLJE_COLOR="dark-green"
 
 UNITS_LABEL=N eq "3" || N eq "6"? "ms" : "ns"
 UNITS_VALUE=N eq "3" || N eq "6"? 1000000 : 1
