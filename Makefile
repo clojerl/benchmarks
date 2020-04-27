@@ -1,7 +1,13 @@
 .PHONY: graphs report
 
 graphs:
-	./generate-graph.sh
+	scripts/generate-graph.sh
+
+run-all:
+	scripts/run-all.sh
+
+run-3-and-6:
+	scripts/run-3-and-6-multiple-n.sh
 
 report:
 	rebar3 clojerl run -m benchmarks.report

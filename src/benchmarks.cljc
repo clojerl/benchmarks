@@ -146,8 +146,7 @@
   [& [x & xs]]
   #?(:clje (application/ensure_all_started :criterium))
   (let [num (read-string x)
-        {:keys [name f arity] :or {:arity 0}} (experiments num)
+        {:keys [name f arity] :or {arity 0}} (experiments num)
         args (vec (take arity xs))]
-    (println "Running experiment:" name)
-    (println "Calling" f "with args" args)
+    (println "Running experiment" name "with args" args)
     (apply f args)))
