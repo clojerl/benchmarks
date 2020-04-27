@@ -22,15 +22,15 @@
 ;;                                       s-to-ns))))
 
 (defn output-file
-  [num dir prefix]
-  (let [filename (str prefix "-data-" num ".dat")]
+  [dir prefix suffix]
+  (let [filename (str prefix "-data-" suffix ".dat")]
     (str/join "/" [dir filename])))
 
 (defmacro run-experiment
-  [num expr]
+  [suffix expr]
   `(experiment ~expr
                10000
-               (output-file ~num *data-dir* *file-prefix*)))
+               (output-file *data-dir* *file-prefix* ~suffix)))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment -1
@@ -69,9 +69,10 @@
 ;; -----------------------------------------------------------------------------
 
 (defn dynamic-function-application
-  []
-  (let [x (into [] (range 1000000))]
-    (run-experiment 3 (apply + x))))
+  [& [n]]
+  (let [n (if n (read-string n) 1000000)
+        x (into [] (range n))]
+    (run-experiment (str 3 "-" n) (apply + x))))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 4
@@ -102,9 +103,10 @@
 ;; -----------------------------------------------------------------------------
 
 (defn last-item-in-range
-  []
-  (let [r (range 1000000)]
-    (run-experiment 6 (last r))))
+  [& [n]]
+  (let [n (if n (read-string n) 1000000)
+        r (range n)]
+    (run-experiment (str 6 "-" n) (last r))))
 
 ;; -----------------------------------------------------------------------------
 ;; Experiment 7
@@ -120,7 +122,7 @@
 
 (def experiments
   {-1 {:name "No expression"
-      :f no-expression}
+       :f no-expression}
    0 {:name "Constant expression"
       :f constant-expression}
    1 {:name "Simple function call"
@@ -128,20 +130,24 @@
    2 {:name "List creation"
       :f list-creation}
    3 {:name "Dynamic function application"
-      :f dynamic-function-application}
+      :f dynamic-function-application
+      :arity 1}
    4 {:name "Protocol dispatch"
       :f protocol-dispatch}
    5 {:name "Read expression from string"
       :f read-expr-from-string}
    6 {:name "Last item in range"
-      :f last-item-in-range}
+      :f last-item-in-range
+      :arity 1}
    7 {:name "Tight loop"
       :f tight-loop}})
 
 (defn -main
-  [& args]
+  [& [x & xs]]
   #?(:clje (application/ensure_all_started :criterium))
-  (let [num (-> args first read-string)
-        {:keys [name f]} (experiments num)]
+  (let [num (read-string x)
+        {:keys [name f arity] :or {:arity 0}} (experiments num)
+        args (vec (take arity xs))]
     (println "Running experiment:" name)
-    (f)))
+    (println "Calling" f "with args" args)
+    (apply f args)))

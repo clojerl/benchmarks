@@ -1,8 +1,10 @@
-[{<<"clojerl">>,
-  {git,"git://github.com/clojerl/clojerl.git",
-       {ref,"e2d55d246bb3f0a3f39c211d37d3536c19982997"}},
-  0},
+{"1.1.0",
+[{<<"clojerl">>,{pkg,<<"clojerl">>,<<"0.6.0">>},0},
  {<<"criterium">>,
   {git,"git://github.com/clojerl/criterium.git",
        {ref,"accffc0a2e1012c9a24b39ee54b151083e9bf1da"}},
-  0}].
+  0}]}.
+[
+{pkg_hash,[
+ {<<"clojerl">>, <<"91510D58C9C7B08C5F34D99655CCC35395BCCE0EB4372F3D321929D47C5CB7B6">>}]}
+].
