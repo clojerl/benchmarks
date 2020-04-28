@@ -4,5 +4,4 @@
 (defn parse-file
   [path]
   (->> (str/split (slurp path) "\n")
-       (map read-string)
-       vec))
+       (mapv read-string)))
