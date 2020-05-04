@@ -58,7 +58,7 @@ set xtics min,(max-min)/5,max
 set boxwidth width*0.9
 set style fill transparent solid 0.5 #fillstyle
 set tics out nomirror
-set xlabel "Duration [".UNITS_LABEL."]"
+set xlabel "Duration (".UNITS_LABEL.")"
 set ylabel "Number of Samples"
 
 set grid
@@ -86,7 +86,7 @@ set output OUTPUT
 # Labels
 set offset graph 0,0.05,0.05,0
 set xlabel "Sample"
-set ylabel "Duration [".UNITS_LABEL."]"
+set ylabel "Duration (".UNITS_LABEL.")"
 
 # Logarithmic scale
 # set logscale y 10
@@ -150,7 +150,7 @@ set xtics nomirror
 set ytics nomirror
 # set ytics format "%.1s%c"
 
-set ylabel "Duration [".UNITS_LABEL."]"
+set ylabel "Duration (".UNITS_LABEL.")"
 
 set grid
 
